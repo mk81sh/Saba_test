@@ -1,0 +1,39 @@
+{% load render_partial %}
+{% load static %}
+<!doctype html>
+<html lang="fa" dir="rtl">
+
+<!-- Mirrored from rubik-market-html.wbrk.ir/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 12 Aug 2023 06:30:53 GMT -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %}{% endblock %}</title>
+    <!-- CSS Styles -->
+    {% include 'shared/header_references.html' %}
+    {% block header_references %}{% endblock %}
+    <!-- /CSS Styles -->
+</head>
+<body {% block body %}{% endblock %}>
+<!-- Header -->
+{% render_partial 'home_module.views.header_settings' %}
+<!-- /Header -->
+
+<!-- content -->
+{% block content %}{% endblock %}
+<!-- /content -->
+
+<!-- footer -->
+{% render_partial 'home_module.views.footer_settings' %}
+<!-- /footer -->
+
+<!-- Scripts -->
+{% include 'shared/footer_references.html' %}
+{% block footer_references %}{% endblock %}
+<!-- /Scripts -->
+
+
+</body>
+<!-- Mirrored from rubik-market-html.wbrk.ir/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 12 Aug 2023 06:31:42 GMT -->
+</html>

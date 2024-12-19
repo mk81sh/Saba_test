@@ -1,0 +1,57 @@
+{% extends 'shared/_layout.html' %}
+{% load poll_extras %}
+
+{% block title %}
+    محصولات
+{% endblock %}
+
+{% block content %}
+    <section class="inner-page" id="products-page">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="content">
+                        <div class="row">
+                            <div class="col-12 col-lg-9 px-0 pl-lg-0 pr-lg-2 mt-2 mt-lg-0">
+                                <div class="mt-2" id="pager">
+                                    <div class="container">
+                                        <div class="row row-cols-1 gx-md-4">
+                                            <!-- Products -->
+                                            {% for product in products %}
+                                                <div class="col">
+                                                    <!-- Product Box -->
+                                                    <div class="encode4326654321vfb-row">
+                                                        <div class="row">
+                                                            <div class="col-12 col-md-8">
+                                                                <div class="details py-3 px-3">
+                                                                    <a href="#"><h2>{{ product.title }}</h2></a>
+                                                                    <div class="encode4365gbf265g43d mb-2">{{ product.price | tdc }}</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- /Product Box -->
+                                                </div>
+                                            {% endfor %}
+
+                                            <!-- /Products -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div id="pagination-bg">
+                                                <ul class="pagination justify-content-center pagination-sm"></ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

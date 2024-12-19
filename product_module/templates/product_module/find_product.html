@@ -1,0 +1,197 @@
+{% extends 'shared/_layout.html' %}
+{% load poll_extras %}
+
+{% block title %}
+    گزارشات
+{% endblock %}
+
+{% block content %}
+    <section class="inner-page" id="products-page">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="content">
+                        <div class="row">
+                            <div class="col-12 col-lg-3 px-3 px-lg-0">
+                                <!-- Side Panel -->
+                                <div class="accordion filters-container">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="headingOne">
+                                            <button class="accordion-button py-2 px-3" type="button"
+                                                    data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                                                    aria-expanded="true" aria-controls="collapseOne">
+                                                برندها
+                                            </button>
+                                        </h2>
+                                        <div id="collapseOne" class="accordion-collapse collapse show"
+                                             aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                            <div class="accordion-body">
+                                                {% for brand in brands %}
+                                                    <div class="form-group">
+                                                        <a class="text-color"
+                                                           href="{% url 'brand' brand=brand.url_title %}">
+                                                            <label for="category_{{ brand.id }}">{{ brand.name }}</label>
+                                                        </a>
+                                                    </div>
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion filters-container mt-3">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="headingTwo">
+                                            <button class="accordion-button py-2 px-3" type="button"
+                                                    data-bs-toggle="collapse" data-bs-target="#collapseTwo"
+                                                    aria-expanded="true" aria-controls="collapseTwo">
+                                                کشورهای سازنده
+                                            </button>
+                                        </h2>
+                                        <div id="collapseTwo" class="accordion-collapse collapse show"
+                                             aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                                            <div class="accordion-body">
+                                                {% for built in built_country %}
+                                                    <div class="form-group">
+                                                        <a class="text-color"
+                                                           href="{% url 'built_country' bcountry=built.url_title %}">
+                                                            <label for="category_{{ built.id }}">{{ built.country }}</label>
+                                                        </a>
+                                                    </div>
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion filters-container mt-3">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="headingThree">
+                                            <button class="accordion-button py-2 px-3" type="button"
+                                                    data-bs-toggle="collapse" data-bs-target="#collapseThree"
+                                                    aria-expanded="true" aria-controls="collapseThree">
+                                                رنگ ها
+                                            </button>
+                                        </h2>
+                                        <div id="collapseThree" class="accordion-collapse collapse show"
+                                             aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                                            <div class="accordion-body">
+                                                {% for color in colors %}
+                                                    <div class="form-group">
+                                                        <a class="text-color" href="{% url 'color' color=color.name %}">
+                                                            <label for="category_{{ color.id }}">{{ color.name }}</label>
+                                                        </a>
+                                                    </div>
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion filters-container mt-3">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="headingFour">
+                                            <button class="accordion-button py-2 px-3" type="button"
+                                                    data-bs-toggle="collapse" data-bs-target="#collapseFour"
+                                                    aria-expanded="true" aria-controls="collapseFour">
+                                                وضعیت موجودی
+                                            </button>
+                                        </h2>
+                                        <div id="collapseFour" class="accordion-collapse collapse show"
+                                             aria-labelledby="headingFour" data-bs-parent="#accordionExample">
+                                            <div class="accordion-body">
+                                                <div class="form-group">
+                                                    <a class="text-color"
+                                                       href="{% url 'is_exist' is_exist='exist' %}"><label
+                                                            for="category1">موجود</label></a>
+                                                </div>
+                                                <div class="form-group">
+                                                    <a class="text-color"
+                                                       href="{% url 'is_exist' is_exist='not_exist' %}"><label
+                                                            for="category2">ناموجود</label></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion filters-container mt-3">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="headingFive">
+                                            <button class="accordion-button py-2 px-3" type="button"
+                                                    data-bs-toggle="collapse" data-bs-target="#collapseFive"
+                                                    aria-expanded="true" aria-controls="collapseFive">
+                                                وضعیت کشور برند و کشور سازنده
+                                            </button>
+                                        </h2>
+                                        <div id="collapseFive" class="accordion-collapse collapse show"
+                                             aria-labelledby="headingFive" data-bs-parent="#accordionExample">
+                                            <div class="accordion-body">
+                                                <div class="form-group">
+                                                    <a class="text-color" href="{% url 'is_same' is_same='same' %}">
+                                                        <label for="category11">کشور برند با کشور سازنده یکسان
+                                                            باشد</label>
+                                                    </a>
+                                                </div>
+                                                <div class="form-group">
+                                                    <a class="text-color" href="{% url 'is_same' is_same='not_same' %}">
+                                                        <label for="category12">کشور برند با کشور سازنده یکسان
+                                                            نباشد</label>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="col-12 col-lg-9 px-0 pl-lg-0 pr-lg-2 mt-2 mt-lg-0">
+                                {% if products %}
+                                    <div class="mt-2" id="pager">
+                                        <div class="container">
+                                            <div class="row row-cols-1 gx-md-4">
+                                                <!-- Products -->
+                                                {% for product in products %}
+                                                    <div class="col">
+                                                        <!-- Product Box -->
+                                                        <div class="encode4326654321vfb-row">
+                                                            <div class="row">
+                                                                <div class="col-12 col-md-8">
+                                                                    <div class="details py-3 px-3">
+                                                                        <a href="#"><h2>{{ product.title }}</h2></a>
+                                                                        <div class="encode4365gbf265g43d mb-2">{{ product.price | tdc }}</div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- /Product Box -->
+                                                    </div>
+                                                {% endfor %}
+
+                                                <!-- /Products -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div id="pagination-bg">
+                                                    <ul class="pagination justify-content-center pagination-sm"></ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% else %}
+                                    <div class="alert-info2">
+                                        <div class="col-md-6 alert alert-info">
+                                            <p>محصولی مطابق با فیلتر انجام شده یافت نشد!</p>
+                                        </div>
+                                    </div>
+
+                                {% endif %}
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
